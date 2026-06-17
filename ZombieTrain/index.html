@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>🚂 좀비 트레인 — Zombie Train</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ===== 상단 비축 HUD ===== -->
+    <header id="hud">
+      <div class="bars">
+        <div class="bar" data-tip="🍞 식량 — 승무원이 먹는 비축 식량. 떨어지면 배고픔이 올라 체력이 깎입니다."><div class="bar-fill food"  id="bar-food"></div><span class="bar-label">🍞 <b id="val-food">0</b></span></div>
+        <div class="bar" data-tip="💧 물 — 승무원이 마시는 비축 물. 떨어지면 목마름이 올라 체력이 깎입니다."><div class="bar-fill water" id="bar-water"></div><span class="bar-label">💧 <b id="val-water">0</b></span></div>
+        <div class="bar" data-tip="⛽ 연료 — 주행에 소모. 0이 되면 불모지에 멈춥니다(보통속도 약 10분 주행)."><div class="bar-fill fuel"  id="bar-fuel"></div><span class="bar-label">⛽ <b id="val-fuel">0</b></span></div>
+        <div class="bar" data-tip="🛠️ 기차 내구도 — 정차 중 기차에 몰린 좀비가 손상시킵니다. 재료·부품으로 수리하세요."><div class="bar-fill dur"   id="bar-dur"></div><span class="bar-label">🛠️ <b id="val-dur">0</b></span></div>
+      </div>
+      <div class="chips">
+        <span class="chip" data-tip="🔩 재료(고철) — 수리·객차 증설·울타리·파종에 사용">🔩 <b id="val-scrap">0</b></span>
+        <span class="chip" data-tip="⚙️ 부품 — 수리·객차 증설·울타리에 사용">⚙️ <b id="val-parts">0</b></span>
+        <span class="chip" data-tip="💊 약 — 감염된 인원을 치료합니다">💊 <b id="val-meds">0</b></span>
+        <span class="chip" data-tip="🚃 객차 — 사용 칸 / 전체 칸. 동료는 칸당 1명, 증설로 늘립니다">🚃 <b id="val-cars">0</b></span>
+        <span class="chip" data-tip="📏 이동 거리(km) — 멀리 갈수록 점수가 올라갑니다">📏 <b id="val-km">0</b>km</span>
+        <span class="chip" data-tip="📅 생존 일수">📅 <b id="val-day">1</b>일</span>
+        <span class="chip" data-tip="⚡ 현재 주행 속도(정지/저속/보통/고속)">⚡ <b id="val-speed">정지</b></span>
+        <span class="chip" data-tip="🌦️ 날씨 — 비가 오면 탐험 중 비를 맞은 인원의 체온이 떨어집니다(실내·기차·은신처에서 회복)">🌦️ <b id="val-weather">맑음</b></span>
+        <button id="newgame-btn" class="chip-btn" title="새 게임">↺</button>
+      </div>
+    </header>
+
+    <!-- ===== Stage ===== -->
+    <main id="stage">
+      <canvas id="scene"></canvas>
+
+      <!-- 항시 표시되는 크루 현황 -->
+      <div id="crew-hud"></div>
+
+      <button id="return-btn">🚂 복귀</button>
+
+      <div id="controls">
+        <div id="dpad">
+          <button data-dir="up"    class="d-up">▲</button>
+          <button data-dir="left"  class="d-left">◀</button>
+          <button data-dir="right" class="d-right">▶</button>
+          <button data-dir="down"  class="d-down">▼</button>
+        </div>
+        <button id="interact-btn" title="상호작용 (E)">✋</button>
+        <button id="attack-btn" title="공격 (클릭 또는 ⚔️ — 바라보는 방향)">⚔️</button>
+      </div>
+    </main>
+
+    <!-- ===== Bottom nav (기차 모드) ===== -->
+    <nav id="nav">
+      <button data-panel="cab">🎛️<span>운행</span></button>
+      <button data-panel="map">🗺️<span>지도</span></button>
+      <button data-panel="farm">🌱<span>농사</span></button>
+      <button data-panel="roster">🤝<span>동료</span></button>
+      <button data-panel="craft">⚔️<span>무기</span></button>
+      <button data-panel="repair">🔧<span>정비</span></button>
+      <button data-panel="addcar">🚃<span>증설</span></button>
+      <button data-panel="help">❓<span>도움말</span></button>
+    </nav>
+  </div>
+
+  <div id="modal" class="hidden">
+    <div class="modal-card">
+      <div class="modal-head"><h2 id="modal-title">패널</h2><button id="modal-close">✕</button></div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toasts"></div>
+  <div id="tip" class="hidden"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/train.js"></script>
+  <script src="js/explore.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/actions.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
