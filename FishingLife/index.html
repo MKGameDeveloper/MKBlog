@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>🎣 낚시생활 — Fishing Life</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ===== Topbar ===== -->
+    <header id="topbar">
+      <div class="top-left">
+        <div class="stat gold">💰 <b id="gold">0</b></div>
+        <div class="stat">📅 <b id="day">1</b>일</div>
+        <div class="stat" id="season">봄</div>
+        <div class="stat" id="weather">맑음</div>
+        <div class="stat" id="time">아침</div>
+      </div>
+      <div class="top-right">
+        <button id="time-btn" class="chip-btn" title="시간 보내기">⏭️ 시간 보내기</button>
+        <button id="danger-reset" class="chip-btn ghost" title="새 게임">↺</button>
+      </div>
+    </header>
+
+    <!-- ===== Equipment chips ===== -->
+    <div id="chipbar">
+      <div class="chip" id="loc-chip">🪷 잔잔한 연못</div>
+      <div class="chip" id="rod-chip">🎣 낡은 대나무 낚싯대</div>
+      <div class="chip clickable" id="bait-chip">🪱 지렁이 미끼 x20</div>
+    </div>
+
+    <!-- ===== Overworld scene ===== -->
+    <main id="stage">
+      <canvas id="scene"></canvas>
+
+      <!-- catch result -->
+      <div id="catch-card" class="hidden">
+        <div class="catch-inner">
+          <div id="catch-emoji">🐟</div>
+          <div id="catch-name">물고기</div>
+          <div id="catch-meta"></div>
+        </div>
+      </div>
+
+      <!-- on-screen controls -->
+      <button id="exit-fishing" class="hidden">✕ 그만두기</button>
+      <div id="dpad">
+        <button data-dir="up" class="d-up">▲</button>
+        <button data-dir="left" class="d-left">◀</button>
+        <button data-dir="right" class="d-right">▶</button>
+        <button data-dir="down" class="d-down">▼</button>
+      </div>
+      <button id="action-btn" class="disabled">🔍 둘러보기</button>
+    </main>
+
+    <!-- ===== Bottom nav ===== -->
+    <nav id="nav">
+      <button data-panel="map">🗺️<span>지도</span></button>
+      <button data-panel="inventory">🎒<span>가방</span></button>
+      <button data-panel="craft">⚗️<span>제작</span></button>
+      <button data-panel="quests">📜<span>의뢰</span></button>
+      <button data-panel="traps">🪤<span>통발</span></button>
+      <button data-panel="log">📖<span>도감</span></button>
+    </nav>
+  </div>
+
+  <!-- ===== Modal ===== -->
+  <div id="modal" class="hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="modal-title">패널</h2>
+        <div class="modal-head-right">
+          <span id="modal-gold" class="modal-gold">💰 0</span>
+          <button id="modal-close">✕</button>
+        </div>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ===== Toasts ===== -->
+  <div id="toasts"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/fishart.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/fishing.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/actions.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
