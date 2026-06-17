@@ -5,53 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>SkulLike</title>
 <style>
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-    background: #07070c; overflow: hidden;
-    font-family: -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
-    color: #eee; -webkit-user-select: none; user-select: none;
-  }
-  #wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
-  #game {
-    image-rendering: auto;
-    background: #07070c; touch-action: none; outline: none;
-    box-shadow: 0 0 40px rgba(0,0,0,0.8);
-  }
-  #hint {
-    position: fixed; left: 50%; bottom: 8px; transform: translateX(-50%);
-    font-size: 12px; color: #667; opacity: 0.7; pointer-events: none;
-  }
-</style>
-</head>
-<body>
-<div id="wrap"><canvas id="game" width="1280" height="720" tabindex="0"></canvas></div>
-<div id="hint">방향키/WASD 이동 · J 공격 · K 점프 · L 스킬 · Shift 대시 · I 교체 · E 상호작용</div>
-<script>
-(function () {
-'use strict';
-
-// =====================================================================
-//  RUNTIME HELPERS — a thin shim mirroring the slice of dart:ui / Flutter
-//  the game relies on, so the gameplay/painter code ports almost 1:1.
-// =====================================================================
-
-// ---- math (mirror Dart num methods so ports read the same) ----
-const _def = (proto, name, fn) =>
-  Object.defineProperty(proto, name, { value: fn, enumerable: false, writable: true, configurable: true });
-
-_def(Number.prototype, 'clamp', function (lo, hi) { const v = this.valueOf(); return v < lo ? lo : v > hi ? hi : v; });
-_def(Number.prototype, 'abs', function () { return Math.abs(this.valueOf()); });
-_def(Number.prototype, 'floor', function () { return Math.floor(this.valueOf()); });
-_def(Number.prototype, 'ceil', function () { return Math.ceil(this.valueOf()); });
-_def(Number.prototype, 'round', function () { return Math.round(this.valueOf()); });
-_def(Number.prototype, 'truncate', function () { return Math.trunc(this.valueOf()); });
-_def(Number.prototype, 'toInt', function () { return Math.trunc(this.valueOf()); });
-_def(Number.prototype, 'toDouble', function () { return this.valueOf(); });
-_def(Number.prototype, 'toStringAsFixed', function (n) { return this.valueOf().toFixed(n); });
-Object.defineProperty(Number.prototype, 'isNegative', { get() { return this.valueOf() < 0; }, enumerable: false, configurable: true });
-Object.defineProperty(Number.prototype, 'sign', { get() { return Math.sign(this.valueOf()); }, enumerable: false, configurable: true });
-
-// ---- list (mirror the Dart Iterable/List API used by the game) ----
+  <!doctype html>
+  <html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SkulLike — Redirecting</title>
+    <meta http-equiv="refresh" content="0;url=/MKBlog/SkulLike/web/index.html">
+    <link rel="canonical" href="/MKBlog/SkulLike/web/index.html">
+  </head>
+  <body>
+    <p>Redirecting to the web build version of SkulLike. If you are not redirected, <a href="/MKBlog/SkulLike/web/index.html">click here</a>.</p>
+    <script>location.replace('/MKBlog/SkulLike/web/index.html');</script>
+  </body>
+  </html>
 _def(Array.prototype, 'add', function (x) { this.push(x); });
 _def(Array.prototype, 'addAll', function (xs) { for (const x of xs) this.push(x); });
 _def(Array.prototype, 'contains', function (x) { return this.indexOf(x) !== -1; });
