@@ -1,0 +1,15 @@
+# temp probe/screenshot files used during development
+_*.html
+_*.png
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# editor
+.vscode/
+.idea/
+
+# node (not used, but just in case)
+node_modules/

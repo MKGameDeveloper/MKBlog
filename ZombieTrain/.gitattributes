@@ -1,0 +1,8 @@
+# 줄바꿈 정규화 — 저장소에는 LF로 통일(체크아웃 경고 방지)
+* text=auto eol=lf
+
+# GitHub 언어 통계(Linguist) 조정
+*.html linguist-language=HTML
+*.css  linguist-language=CSS
+*.js   linguist-language=JavaScript
+README.md linguist-documentation

@@ -1,0 +1,14 @@
+# 의존성 / 빌드 산출물
+node_modules/
+package.json
+package-lock.json
+
+# 렌더 검증용 임시 이미지
+test/view_*.png
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
