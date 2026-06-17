@@ -1,61 +1,75 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ko">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="skul_like">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>skul_like</title>
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Dev: kill any stale service worker + caches so a fresh build always shows
-       up in normal browser windows (no more hard-refresh / incognito needed). -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function (regs) {
-        regs.forEach(function (r) { r.unregister(); });
-      });
-    }
-    if (window.caches && caches.keys) {
-      caches.keys().then(function (keys) {
-        keys.forEach(function (k) { caches.delete(k); });
-      });
-    }
-  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <base href="/MKBlog/">
+  <title>Games Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- AdSense: 배포 후 ca-pub-XXXX 를 넣어 활성화하세요 -->
+  <!-- <script data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 </head>
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <header>
+    <h1>내 게임 포트폴리오</h1>
+    <nav>
+      <a href="index.html">홈</a>
+      <a href="portfolio.html">포트폴리오</a>
+      <a href="farmtoday.html">FarmToday</a>
+      <a href="fishinglife.html">FishingLife</a>
+      <a href="skulike.html">SkulLike</a>
+      <a href="zombietrain.html">ZombieTrain</a>
+    </nav>
+  </header>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
-  <script src="flutter_bootstrap.js" async></script>
+  <main>
+    <section class="controls">
+      <p>아래에서 게임을 선택하면 동일 페이지에서 바로 플레이할 수 있습니다.</p>
+      <div class="buttons">
+        <button data-src="FarmToday/index.html">FarmToday</button>
+        <button data-src="FishingLife/index.html">FishingLife</button>
+        <button data-src="SkulLike/web/index.html">SkulLike</button>
+        <button data-src="ZombieTrain/index.html">ZombieTrain</button>
+      </div>
+    </section>
+
+    <section class="player">
+      <iframe id="gameFrame" src="" title="game" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+    </section>
+
+    <section class="ad-placeholder">
+      <!-- AdSense 슬롯 자리: 배포 후 퍼블리셔 ID를 넣어 활성화하세요 -->
+      <div class="ad-box">광고 영역 (AdSense 퍼블리셔 ID 추가 시 활성화)</div>
+      <!--
+      예시: 아래 주석을 해제하고 data-ad-client에 당신의 ca-pub-XXXXXXXX 값을 넣으세요.
+      <script data-ad-client="ca-pub-XXXXXXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-XXXXXXXXXXXX"
+           data-ad-slot="0000000000"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+    </section>
+  </main>
+
+  <footer>
+    <small>배포: GitHub Pages 권장 · 게임 소스는 동일 리포지토리 내에 있어야 정상 동작합니다.</small>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.buttons button');
+    const frame = document.getElementById('gameFrame');
+    function setSrc(src){
+      frame.src = src;
+      window.location.hash = encodeURIComponent(src);
+    }
+    buttons.forEach(b => b.addEventListener('click', ()=> setSrc(b.dataset.src)) );
+    // 해시에서 src 복원
+    if(location.hash){
+      try{ frame.src = decodeURIComponent(location.hash.slice(1)); }catch(e){}
+    }
+  </script>
 </body>
 </html>
