@@ -1,0 +1,32 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Prepare deploy directory
+        run: |
+          set -e
+          rm -rf deploy || true
+          mkdir deploy
+          # copy site contents
+          if [ -d "site" ]; then cp -R site/. deploy/; fi
+          # copy game folders if they exist
+          if [ -d "FarmToday" ]; then cp -R FarmToday deploy/FarmToday; fi
+          if [ -d "FishingLife" ]; then cp -R FishingLife deploy/FishingLife; fi
+          if [ -d "SkulLike" ]; then cp -R SkulLike deploy/SkulLike; fi
+          if [ -d "ZombieTrain" ]; then cp -R ZombieTrain deploy/ZombieTrain; fi
+
+      - name: Deploy site/
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy
